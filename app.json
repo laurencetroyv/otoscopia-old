@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "otoscopia",
+    "slug": "otoscopia",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "otoscopia"
+}
