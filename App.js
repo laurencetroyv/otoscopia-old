@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Provider } from 'react-native-paper';
 import AuthenticationProvider from './src/services/AuthenticationProvider';
-import Navigation from './src/infrastructure/Navigation';
+import Navigation from './src/infrastructure/navigation/Navigation';
 
 export default function App() {
   return (
