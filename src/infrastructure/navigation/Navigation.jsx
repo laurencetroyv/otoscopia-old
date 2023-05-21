@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { Text } from 'react-native-paper';
-import { AuthenticationContext } from '../../services/AuthenticationProvider';
+import { AuthenticationContext } from '../../services/Authentication-Provider';
 import Accounts from './Accounts';
 
 export default function Navigation() {
