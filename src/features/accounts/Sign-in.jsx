@@ -69,7 +69,6 @@ export default function SignIn() {
           }
           showHelper={passwordError}
           helperMessage="Invalid password"
-          passwordRules="minlength: 8; required: lower; required: upper; required: digit; required: [-];"
         />
 
         <View className="space-y-4 mt-4">
