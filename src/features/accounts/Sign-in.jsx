@@ -5,7 +5,7 @@ import { Button, Divider, Text, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import ScreenContainer from '../../components/Screen-Container';
 import StyledTextInput from '../../components/Styled-TextInput';
-import AnimatedSignIn from '../../assets/sign-up-illustration.json';
+import AnimatedIllustration from '../../assets/sign-in-illustration.json';
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -19,7 +19,7 @@ export default function SignIn() {
   return (
     <ScreenContainer enableKeyboardAvoidingView scrollEnabled>
       <View className="flex-1 p-4">
-        <AnimatedLottieView source={AnimatedSignIn} autoPlay loop className="w-full" />
+        <AnimatedLottieView source={AnimatedIllustration} autoPlay loop className="w-full" />
 
         <Divider className="mb-4" />
 
