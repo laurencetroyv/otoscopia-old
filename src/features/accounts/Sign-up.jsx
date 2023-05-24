@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View, useColorScheme } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AnimatedLottieView from 'lottie-react-native';
 import { Button, Checkbox, Divider, Modal, Portal, Text, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +15,7 @@ export default function SignUp() {
   const [emailError, setEmailError] = useState(false);
 
   const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [phoneNumberError, setPhoneNumberError] = React.useState(false);
 
   const colorScheme = useColorScheme();
 
@@ -37,18 +38,6 @@ export default function SignUp() {
   });
 
   const icon = ({ size }) => <CountryFlag isoCode="ph" size={size} />;
-
-  useEffect(() => {
-    const cleanPhoneNumber = phoneNumber.replace(/\s/g, '');
-
-    if (cleanPhoneNumber.length === 11) {
-      const formatPhoneNumber = `${cleanPhoneNumber.substring(0, 4)} ${cleanPhoneNumber.substring(
-        4,
-        7
-      )} ${cleanPhoneNumber.substring(7, 11)}`;
-      setPhoneNumber(formatPhoneNumber);
-    }
-  }, [phoneNumber]);
 
   return (
     <ScreenContainer enableKeyboardAvoidingView scrollEnabled>
@@ -73,10 +62,13 @@ export default function SignUp() {
           keyboardType="numeric"
           maxLength={11}
           onChangeText={setPhoneNumber}
+          onEndEditing={() =>
+            phoneNumber.length !== 11 ? setPhoneNumberError(true) : setPhoneNumberError(false)
+          }
           placeholder="09"
           textContentType="none"
           left={<TextInput.Icon style={styles.textInputIcon} icon={icon} />}
-          showHelper={emailError}
+          showHelper={phoneNumberError}
           helperMessage="Invalid mobile number"
         />
 
