@@ -1,5 +1,5 @@
 import { TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AnimatedLottieView from 'lottie-react-native';
 import { Checkbox, Divider, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -11,6 +11,7 @@ import StyledButton from '../../components/Styled-Button';
 import Policy from '../../components/Policy';
 import Header from './components/Header';
 import PhoneNumberInput from './components/Phone-Number-Input';
+import { AuthenticationContext } from '../../services/Authentication-Provider';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -23,6 +24,14 @@ export default function SignUp() {
   const [modal, setModal] = useState(false);
 
   const navigation = useNavigation();
+
+  const { signUpRequest } = useContext(AuthenticationContext);
+
+  const signUpFunction = () => {
+    if (phoneNumberError === false && emailError === false && checked === true) {
+      signUpRequest(phoneNumber.trim(), email.toLowerCase().trim());
+    }
+  };
 
   return (
     <ScreenContainer enableKeyboardAvoidingView scrollEnabled>
@@ -92,7 +101,7 @@ export default function SignUp() {
         </View>
 
         <View>
-          <StyledButton text="Sign Up" />
+          <StyledButton text="Sign Up" onPress={signUpFunction} />
         </View>
       </View>
     </ScreenContainer>
