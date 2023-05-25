@@ -34,7 +34,7 @@ export default function PhoneNumberInput({ onChangeText, onEndEditing, showHelpe
 }
 
 PhoneNumberInput.propTypes = {
-  onChangeText: PropTypes.bool.isRequired,
+  onChangeText: PropTypes.func.isRequired,
   onEndEditing: PropTypes.func.isRequired,
   showHelper: PropTypes.bool.isRequired,
 };
