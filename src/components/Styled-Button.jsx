@@ -3,9 +3,9 @@ import { TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-paper';
 import PropTypes from 'prop-types';
 
-export default function StyledButton({ text }) {
+export default function StyledButton({ text, onPress }) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       {/* eslint-disable-next-line react-native/no-raw-text */}
       <Button mode="contained">{text}</Button>
     </TouchableOpacity>
@@ -14,4 +14,5 @@ export default function StyledButton({ text }) {
 
 StyledButton.propTypes = {
   text: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
 };
