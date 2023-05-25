@@ -1,4 +1,3 @@
-import { View } from 'react-native';
 import React from 'react';
 import { HelperText, TextInput } from 'react-native-paper';
 import PropTypes from 'prop-types';
@@ -24,7 +23,7 @@ export default function StyledTextInput({
   helperMessage,
 }) {
   return (
-    <View className="my-2">
+    <>
       <TextInput
         mode="outlined"
         label={label}
@@ -48,7 +47,7 @@ export default function StyledTextInput({
         error={showHelper}
       />
       {showHelper && <HelperText>{helperMessage}</HelperText>}
-    </View>
+    </>
   );
 }
 
@@ -62,8 +61,8 @@ StyledTextInput.propTypes = {
   inputMode: PropTypes.node,
   keyboardType: PropTypes.node,
   maxLength: PropTypes.node,
-  onChangeText: PropTypes.func,
-  onEndEditing: PropTypes.func,
+  onChangeText: PropTypes.func.isRequired,
+  onEndEditing: PropTypes.func.isRequired,
   placeholder: PropTypes.node.isRequired,
   secureTextEntry: PropTypes.bool,
   textContentType: PropTypes.node.isRequired,
@@ -82,8 +81,6 @@ StyledTextInput.defaultProps = {
   inputMode: 'text',
   keyboardType: 'default',
   maxLength: 32,
-  onChangeText: () => {},
-  onEndEditing: () => {},
   secureTextEntry: false,
   left: null,
   right: null,
