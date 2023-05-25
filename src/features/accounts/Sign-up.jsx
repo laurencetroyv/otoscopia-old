@@ -1,14 +1,16 @@
-import { ScrollView, StyleSheet, TouchableOpacity, View, useColorScheme } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import AnimatedLottieView from 'lottie-react-native';
-import { Button, Checkbox, Divider, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import { Checkbox, Divider, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import CountryFlag from 'react-native-country-flag';
 import ScreenContainer from '../../components/Screen-Container';
-import StyledTextInput from '../../components/Styled-TextInput';
-import colors from '../../infrastructure/themes/colors';
-import { PrivacyPolicy, TermsAndConditions } from '../../services/mock-data';
 import AnimatedIllustration from '../../assets/sign-up-illustration.json';
+import EmailInput from './components/EmailInput';
+import PressableText from '../../components/Pressable-Text';
+import StyledButton from '../../components/Styled-Button';
+import Policy from '../../components/Policy';
+import Header from './components/Header';
+import PhoneNumberInput from './components/Phone-Number-Input';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -17,100 +19,58 @@ export default function SignUp() {
   const [phoneNumber, setPhoneNumber] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState(false);
 
-  const colorScheme = useColorScheme();
-
   const [checked, setChecked] = useState(false);
   const [modal, setModal] = useState(false);
 
   const navigation = useNavigation();
 
-  const styles = StyleSheet.create({
-    modalStyle: {
-      backgroundColor: colorScheme === 'dark' ? colors.dark.surface : colors.light.surface,
-      borderRadius: 5,
-      marginHorizontal: 16,
-      maxHeight: '70%',
-      padding: 20,
-    },
-    textInputIcon: {
-      borderRadius: 0,
-    },
-  });
-
-  const icon = ({ size }) => <CountryFlag isoCode="ph" size={size} />;
-
   return (
     <ScreenContainer enableKeyboardAvoidingView scrollEnabled>
-      <View className="p-4">
+      <View className="p-4 space-y-4">
         <AnimatedLottieView source={AnimatedIllustration} autoPlay loop className="w-full" />
 
-        <Divider className="my-4" />
-
-        <View className="mb-6">
-          <Text className="font-bold text-3xl text-primary">Hello</Text>
-          <Text className="font-bold text-3xl">Create an account</Text>
-          <Text className="font-bold text-3xl">now.</Text>
-          <Text className="text-sm w-3/4 leading-4 mt-4">
-            Please fill in the form to create a new account and continue
-          </Text>
+        <View>
+          <Divider />
         </View>
 
-        <StyledTextInput
-          mode="outlined"
-          label="Phone Number"
-          inputMode="numeric"
-          keyboardType="numeric"
-          maxLength={11}
-          onChangeText={setPhoneNumber}
-          onEndEditing={() =>
-            phoneNumber.length !== 11 ? setPhoneNumberError(true) : setPhoneNumberError(false)
-          }
-          placeholder="09"
-          textContentType="none"
-          left={<TextInput.Icon style={styles.textInputIcon} icon={icon} />}
-          showHelper={phoneNumberError}
-          helperMessage="Invalid mobile number"
-        />
+        <View>
+          <Header
+            title="Hello"
+            secondTitle="Create an account"
+            thirdTitle="now."
+            subtitle="Please fill in the form to create a new account and continue"
+          />
+        </View>
 
-        <StyledTextInput
-          label="Email Address"
-          autoCapitalize="words"
-          autoComplete="email"
-          inputMode="email"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          onEndEditing={() =>
-            !email.includes('@deped.edu.ph') ? setEmailError(true) : setEmailError(false)
-          }
-          placeholder="@deped.edu.ph"
-          textContentType="emailAddress"
-          right={<TextInput.Icon icon="email" forceTextInputFocus={false} />}
-          showHelper={emailError}
-          helperMessage="Must be a valid deped.edu email address"
-        />
+        <View>
+          <PhoneNumberInput
+            onChangeText={setPhoneNumber}
+            onEndEditing={() =>
+              phoneNumber.length !== 11 ? setPhoneNumberError(true) : setPhoneNumberError(false)
+            }
+            showHelper={phoneNumberError}
+          />
+        </View>
 
-        <View className="my-4">
-          <Portal>
-            <Modal
-              visible={modal}
-              onDismiss={() => setModal(false)}
-              contentContainerStyle={styles.modalStyle}
-            >
-              <ScrollView showsVerticalScrollIndicator={false}>
-                <Text className="font-bold text-2xl text-center">Terms and Conditions</Text>
-                <Text>{TermsAndConditions}</Text>
+        <View>
+          <EmailInput
+            onChangeText={setEmail}
+            onEndEditing={() =>
+              !email.includes('@deped.edu.ph') ? setEmailError(true) : setEmailError(false)
+            }
+            showHelper={emailError}
+          />
+        </View>
 
-                <Text className="font-bold text-2xl text-center">Privacy Policy</Text>
-                <Text>{PrivacyPolicy}</Text>
-              </ScrollView>
-            </Modal>
-          </Portal>
+        <View>
+          <Policy visible={modal} onDismiss={() => setModal(false)} />
 
           <View className="flex-row w-[90%] items-center">
             <Checkbox
               status={checked ? 'checked' : 'unchecked'}
               onPress={() => setChecked(!checked)}
             />
+
             <TouchableOpacity onPress={() => setModal(true)}>
               <Text>
                 <Text>I agree to the </Text>
@@ -122,17 +82,18 @@ export default function SignUp() {
           </View>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Sign In')}>
-          <Text className="text-center mb-4">
-            <Text>Already have an account?</Text>
-            <Text className="text-primary font-bold"> Click Here</Text>
-          </Text>
-        </TouchableOpacity>
+        <View>
+          <PressableText
+            text="Already have an account?"
+            strongText=" Click Here"
+            onPress={() => navigation.navigate('Sign In')}
+            center
+          />
+        </View>
 
-        <TouchableOpacity>
-          {/* eslint-disable-next-line react-native/no-raw-text */}
-          <Button mode="contained">Sign Up</Button>
-        </TouchableOpacity>
+        <View>
+          <StyledButton text="Sign Up" />
+        </View>
       </View>
     </ScreenContainer>
   );
