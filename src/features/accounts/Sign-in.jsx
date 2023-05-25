@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import AnimatedLottieView from 'lottie-react-native';
 import { Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
@@ -10,15 +10,24 @@ import StyledButton from '../../components/Styled-Button';
 import PressableText from '../../components/Pressable-Text';
 import EmailInput from './components/EmailInput';
 import PasswordInput from './components/PasswordInput';
+import { AuthenticationContext } from '../../services/Authentication-Provider';
 
 export default function SignIn() {
   const navigation = useNavigation();
+  const { signInRequest } = useContext(AuthenticationContext);
+
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState(false);
 
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [passwordSecure, setPasswordSecure] = useState(true);
+
+  const signInFunction = () => {
+    if (emailError === false && passwordError === false) {
+      signInRequest(email.toLowerCase().trim(), password.toLowerCase().trim());
+    }
+  };
 
   return (
     <ScreenContainer enableKeyboardAvoidingView scrollEnabled>
@@ -60,7 +69,7 @@ export default function SignIn() {
         </View>
 
         <View>
-          <StyledButton text="Sign In" />
+          <StyledButton text="Sign In" onPress={signInFunction} />
         </View>
 
         <View>
