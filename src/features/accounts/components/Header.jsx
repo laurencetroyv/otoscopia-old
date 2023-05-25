@@ -16,6 +16,10 @@ export default function Header({ title, secondTitle, thirdTitle, subtitle }) {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   secondTitle: PropTypes.string.isRequired,
-  thirdTitle: PropTypes.string.isRequired,
+  thirdTitle: PropTypes.string,
   subtitle: PropTypes.string.isRequired,
+};
+
+Header.defaultProps = {
+  thirdTitle: null,
 };
