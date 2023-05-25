@@ -6,7 +6,11 @@ export const AuthenticationContext = createContext();
 export default function AuthenticationProvider({ children }) {
   const [user, setUser] = useState();
 
-  const contextValue = useMemo(() => ({ isAuthenticated: !!user }), [user]);
+  const signInRequest = (email, password) => {
+    console.log(email, password);
+  };
+
+  const contextValue = useMemo(() => ({ isAuthenticated: !!user, signInRequest }), [user]);
 
   return (
     <AuthenticationContext.Provider value={contextValue}>{children}</AuthenticationContext.Provider>
