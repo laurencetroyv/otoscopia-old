@@ -67,7 +67,8 @@ export default function SignIn() {
           <PressableText
             text="Don&lsquo;t have have an account?"
             strongText=" Register here"
-            navigate={() => navigation.navigate('Sign Up')}
+            onPress={() => navigation.navigate('Sign Up')}
+            center
           />
         </View>
 
@@ -75,7 +76,8 @@ export default function SignIn() {
           <PressableText
             text="Forgot password?"
             strongText=" Click here"
-            navigate={() => navigation.navigate('Forgot Password')}
+            onPress={() => navigation.navigate('Forgot Password')}
+            center
           />
         </View>
       </View>
