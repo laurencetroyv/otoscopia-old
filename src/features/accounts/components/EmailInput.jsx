@@ -7,7 +7,7 @@ export default function EmailInput({ onChangeText, onEndEditing, showHelper }) {
   return (
     <StyledTextInput
       label="Email Address"
-      autoCapitalize="words"
+      autoCapitalize="none"
       autoComplete="email"
       inputMode="email"
       keyboardType="email-address"
