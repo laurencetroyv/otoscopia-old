@@ -1,9 +1,11 @@
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import React, { useState } from 'react';
-import { Button, Text, TextInput } from 'react-native-paper';
-// import AnimatedLottieView from 'lottie-react-native';
+import { Divider, Text } from 'react-native-paper';
+import AnimatedLottieView from 'lottie-react-native';
 import ScreenContainer from '../../components/Screen-Container';
-import StyledTextInput from '../../components/Styled-TextInput';
+import PasswordAnimation from '../../assets/password-animation.json';
+import EmailInput from './components/EmailInput';
+import StyledButton from '../../components/Styled-Button';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -11,37 +13,35 @@ export default function ForgotPassword() {
 
   return (
     <ScreenContainer enableKeyboardAvoidingView scrollEnabled>
-      <View className="p-4">
-        {/* <AnimatedLottieView source={} */}
+      <View className="p-4 my-16 space-y-4 ">
+        <View className="items-center">
+          <AnimatedLottieView source={PasswordAnimation} autoPlay loop className="w-3/4" />
+        </View>
 
-        <View className="space-y-4">
+        <View>
+          <Divider />
+        </View>
+
+        <View>
           <Text className="font-bold text-3xl text-primary">Forgot Password?</Text>
           <Text className="text-sm w-3/4">
             Worry not! just full in the form below to reset your password!
           </Text>
         </View>
 
-        <StyledTextInput
-          label="Email Address"
-          autoCapitalize="words"
-          autoComplete="email"
-          inputMode="email"
-          keyboardType="email-address"
-          onChangeText={setEmail}
-          onEndEditing={() =>
-            !email.includes('@deped.edu.ph') ? setEmailError(true) : setEmailError(false)
-          }
-          placeholder="@deped.edu.ph"
-          textContentType="emailAddress"
-          right={<TextInput.Icon icon="email" forceTextInputFocus={false} />}
-          showHelper={emailError}
-          helperMessage="Must be a valid deped.edu email address"
-        />
+        <View>
+          <EmailInput
+            onChangeText={setEmail}
+            onEndEditing={() =>
+              !email.includes('@deped.edu.ph') ? setEmailError(true) : setEmailError(false)
+            }
+            showHelper={emailError}
+          />
+        </View>
 
-        <TouchableOpacity>
-          {/* eslint-disable-next-line react-native/no-raw-text */}
-          <Button mode="contained">Continue</Button>
-        </TouchableOpacity>
+        <View>
+          <StyledButton text="Continue" />
+        </View>
       </View>
     </ScreenContainer>
   );
