@@ -4,6 +4,7 @@ import SignIn from '../../features/accounts/Sign-in';
 import SignUp from '../../features/accounts/Sign-up';
 import LoadingScreen from '../../components/Loading-Screen';
 import ForgotPassword from '../../features/accounts/Forgot-Password';
+import PinVerification from '../../features/accounts/PinVerification';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,11 +17,15 @@ function SignUpScreen() {
 }
 
 function ForgotPasswordScreen() {
-  return <ForgotPassword />
+  return <ForgotPassword />;
 }
 
 function LoadingScreenFunction() {
   return <LoadingScreen />;
+}
+
+function PinVerificationScreen() {
+  return <PinVerification />;
 }
 
 export default function Accounts() {
@@ -34,6 +39,7 @@ export default function Accounts() {
       <Stack.Screen name="Sign Up" component={SignUpScreen} />
       <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen} />
       <Stack.Screen name="Loading" component={LoadingScreenFunction} />
+      <Stack.Screen name="Pin" component={PinVerificationScreen} />
     </Stack.Navigator>
   );
 }
