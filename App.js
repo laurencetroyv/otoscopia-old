@@ -7,6 +7,9 @@ import colors from './src/infrastructure/themes/colors';
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
+  const StatusBarColor = isDarkMode
+    ? colors.dark.background
+    : colors.light.background;
   return (
     <AuthenticationProvider>
       <Provider>
@@ -14,7 +17,7 @@ export default function App() {
       </Provider>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={isDarkMode ? colors.dark.background : colors.light.background}
+        backgroundColor={StatusBarColor}
       />
     </AuthenticationProvider>
   );
